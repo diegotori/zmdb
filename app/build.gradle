@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.3"
+    compileSdkVersion rootProject.compile_sdk_version
+    buildToolsVersion rootProject.build_tools_version
     defaultConfig {
         applicationId "com.diegotori.app.zmdb"
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion rootProject.min_sdk_version
+        targetSdkVersion rootProject.compile_sdk_version
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "ZOCDOC_AUTH_TOKEN", "\"3b502b3f-b1ff-4128-bd99-626e74836d9c\""
     }
@@ -18,33 +18,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.bluelinelabs:conductor:2.0.3'
-    compile 'com.bluelinelabs:conductor-support:2.0.3'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.jakewharton.timber:timber:4.3.0'
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.okhttp3:mockwebserver:3.4.1'
-    testCompile('com.android.support.test:runner:0.5') {
-        exclude group: 'org.hamcrest'
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    testCompile('com.squareup.assertj:assertj-android:1.0.0'){
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    testCompile('com.squareup.assertj:assertj-android-support-v4:1.0.0'){
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
+    compile rootProject.libraries.appcompat_v7,
+            rootProject.libraries.android_design,
+            rootProject.thirdPartyLibs.gson,
+            rootProject.thirdPartyLibs.okhttp,
+            rootProject.thirdPartyLibs.retrofit,
+            rootProject.thirdPartyLibs.retrofit_converter_gson,
+            rootProject.thirdPartyLibs.conductor,
+            rootProject.thirdPartyLibs.conductor_support,
+            rootProject.thirdPartyLibs.timber
+    androidTestCompile rootProject.testLibs.espresso_core,
+            rootProject.testLibs.android_junit4_runner,
+            rootProject.testLibs.android_junit4_rules,
+            rootProject.testLibs.mockwebserver,
+            rootProject.assertjLibs
+    testCompile rootProject.testLibs.junit4,
+            rootProject.testLibs.android_junit4_runner,
+            rootProject.testLibs.mockito,
+            rootProject.testLibs.mockwebserver
+    testCompile rootProject.assertjLibs
 }
