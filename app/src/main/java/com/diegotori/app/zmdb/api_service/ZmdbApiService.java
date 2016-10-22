@@ -15,13 +15,13 @@ import retrofit2.http.Query;
  */
 
 public interface ZmdbApiService {
-    @GET("/api/1/FEE/AllMovies&authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
+    @GET("/api/1/FEE/AllMovies?authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
     Call<List<MovieItem>> allMovies();
 
-    @GET("/api/1/FEE/MoviesByRank&authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
+    @GET("/api/1/FEE/MoviesByRank?authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
     Call<List<MovieRankItem>> moviesByRank(@Query("startRankIndex") int startRankIndex,
                                            @Query("numMovies") int numMovies);
 
-    @GET("/api/1/FEE/MovieDetails&authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
+    @GET("/api/1/FEE/MovieDetails?authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
     Call<List<MovieItem>> movieDetails(@Query("movieIds") List<Integer> movieIds);
 }
