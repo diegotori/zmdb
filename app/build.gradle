@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "ZOCDOC_BASE_URL", "\"https://interview.zocdoc.com\""
         buildConfigField "String", "ZOCDOC_AUTH_TOKEN", "\"3b502b3f-b1ff-4128-bd99-626e74836d9c\""
     }
     buildTypes {
