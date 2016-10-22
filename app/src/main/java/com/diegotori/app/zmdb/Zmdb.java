@@ -22,7 +22,7 @@ public class Zmdb extends Application {
         super.onCreate();
         instance = this;
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://interview.zocdoc.com")
+                .baseUrl(BuildConfig.ZOCDOC_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         zmdbApiService = retrofit.create(ZmdbApiService.class);
