@@ -23,5 +23,5 @@ public interface ZmdbApiService {
                                            @Query("numMovies") int numMovies);
 
     @GET("/api/1/FEE/MovieDetails?authToken=" + BuildConfig.ZOCDOC_AUTH_TOKEN)
-    Call<List<MovieItem>> movieDetails(@Query("movieIds") List<Integer> movieIds);
+    Call<List<MovieItem>> movieDetails(@Query("movieIds") int... movieIds);
 }

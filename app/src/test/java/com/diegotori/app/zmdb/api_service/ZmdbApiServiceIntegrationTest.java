@@ -91,10 +91,7 @@ public class ZmdbApiServiceIntegrationTest {
         final MockResponse mockResponse =
                 TestUtils.createMockResponse(classLoader, "movie_details_mock_response.json");
         mockWebServer.enqueue(mockResponse);
-        final List<Integer> movieIds = new ArrayList<>();
-        movieIds.add(332);
-        movieIds.add(290);
-        final Call<List<MovieItem>> networkCall = zmdbApiService.movieDetails(movieIds);
+        final Call<List<MovieItem>> networkCall = zmdbApiService.movieDetails(332, 290);
 
         final Response<List<MovieItem>> response = networkCall.execute();
 
