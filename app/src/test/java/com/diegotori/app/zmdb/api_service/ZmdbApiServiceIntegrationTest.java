@@ -3,8 +3,8 @@ package com.diegotori.app.zmdb.api_service;
 import android.support.test.filters.MediumTest;
 
 import com.diegotori.app.zmdb.TestUtils;
-import com.diegotori.app.zmdb.model.MovieItem;
-import com.diegotori.app.zmdb.model.MovieRankItem;
+import com.diegotori.app.zmdb.mvp.model.MovieItem;
+import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.mockwebserver.MockResponse;

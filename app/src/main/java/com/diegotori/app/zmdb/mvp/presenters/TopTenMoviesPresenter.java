@@ -1,7 +1,7 @@
 package com.diegotori.app.zmdb.mvp.presenters;
 
 import com.diegotori.app.zmdb.api_service.ZmdbApiService;
-import com.diegotori.app.zmdb.model.MovieRankItem;
+import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.diegotori.app.zmdb.mvp.views.TopTenMoviesView;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 

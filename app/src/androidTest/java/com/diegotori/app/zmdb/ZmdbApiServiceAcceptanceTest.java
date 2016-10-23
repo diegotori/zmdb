@@ -4,8 +4,8 @@ import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.diegotori.app.zmdb.api_service.ZmdbApiService;
-import com.diegotori.app.zmdb.model.MovieItem;
-import com.diegotori.app.zmdb.model.MovieRankItem;
+import com.diegotori.app.zmdb.mvp.model.MovieItem;
+import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

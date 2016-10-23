@@ -1,8 +1,8 @@
 package com.diegotori.app.zmdb.api_service;
 
 import com.diegotori.app.zmdb.BuildConfig;
-import com.diegotori.app.zmdb.model.MovieItem;
-import com.diegotori.app.zmdb.model.MovieRankItem;
+import com.diegotori.app.zmdb.mvp.model.MovieItem;
+import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.diegotori.app.zmdb.model;
+package com.diegotori.app.zmdb.mvp.model;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

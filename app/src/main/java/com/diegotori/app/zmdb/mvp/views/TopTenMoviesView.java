@@ -1,6 +1,6 @@
 package com.diegotori.app.zmdb.mvp.views;
 
-import com.diegotori.app.zmdb.model.MovieRankItem;
+import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 import java.util.List;
