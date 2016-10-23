@@ -1,6 +1,7 @@
 package com.diegotori.app.zmdb.mvp.presenters;
 
 import com.diegotori.app.zmdb.api_service.ZmdbApiService;
+import com.diegotori.app.zmdb.mvp.ZmdbBasePresenter;
 import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.diegotori.app.zmdb.mvp.views.TopTenMoviesView;
 import com.diegotori.app.zmdb.utils.ZmdbCache;
@@ -16,14 +17,12 @@ import retrofit2.Response;
  * Created by Diego on 10/23/2016.
  */
 
-public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
-    private final ZmdbApiService apiService;
-    private final ZmdbCache cache;
+public class TopTenMoviesPresenter extends ZmdbBasePresenter<TopTenMoviesView> {
+
     private Call<List<MovieRankItem>> networkCall;
 
     public TopTenMoviesPresenter(ZmdbApiService apiService, ZmdbCache cache){
-        this.apiService = apiService;
-        this.cache = cache;
+        super(apiService, cache);
     }
 
     public void loadTopTenMovies(final boolean pullToRefresh){
@@ -34,7 +33,7 @@ public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
         if (networkCall != null && !networkCall.isCanceled()) {
             networkCall.cancel();
         }
-        final List<MovieRankItem> cachedItems = cache.getCachedTopTenMovies();
+        final List<MovieRankItem> cachedItems = getZmdbCache().getCachedTopTenMovies();
         if(cachedItems != null && !(cachedItems.isEmpty())){
             //Send back cached data.
             if(view != null){
@@ -43,7 +42,7 @@ public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
             }
             return;
         }
-        networkCall = apiService.moviesByRank(0, 11);
+        networkCall = getApiService().moviesByRank(0, 11);
         networkCall.enqueue(new Callback<List<MovieRankItem>>() {
             @Override
             public void onResponse(Call<List<MovieRankItem>> call,
@@ -52,7 +51,7 @@ public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
                 final TopTenMoviesView currentView = getView();
                 if(currentView != null && isViewAttached()){
                     if(items != null && !(items.isEmpty())){
-                        cache.cacheTopTenMovies(items);
+                        getZmdbCache().cacheTopTenMovies(items);
                         currentView.setData(items);
                         currentView.showContent();
                     } else {
