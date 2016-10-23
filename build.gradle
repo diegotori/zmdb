@@ -14,9 +14,9 @@ buildscript {
 
 ext {
     min_sdk_version = 16
-    compile_sdk_version = 25
+    compile_sdk_version = 24
     build_tools_version = "24.0.3"
-    support_library_version = "25.0.0"
+    support_library_version = "24.2.0"
     play_services_version = "9.4.0"
     retrofit_version = "2.1.0"
     picasso_version = "2.5.2"
