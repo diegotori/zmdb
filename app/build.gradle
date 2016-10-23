@@ -30,6 +30,7 @@ dependencies {
             rootProject.libraries.android_design,
             rootProject.thirdPartyLibs.gson,
             rootProject.thirdPartyLibs.okhttp,
+            rootProject.thirdPartyLibs.picasso,
             rootProject.thirdPartyLibs.retrofit,
             rootProject.thirdPartyLibs.retrofit_converter_gson,
             rootProject.thirdPartyLibs.mosby_mvp,
