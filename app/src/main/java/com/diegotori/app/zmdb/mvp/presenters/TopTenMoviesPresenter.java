@@ -3,6 +3,7 @@ package com.diegotori.app.zmdb.mvp.presenters;
 import com.diegotori.app.zmdb.api_service.ZmdbApiService;
 import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.diegotori.app.zmdb.mvp.views.TopTenMoviesView;
+import com.diegotori.app.zmdb.utils.ZmdbCache;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import java.util.List;
@@ -17,19 +18,30 @@ import retrofit2.Response;
 
 public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
     private final ZmdbApiService apiService;
+    private final ZmdbCache cache;
     private Call<List<MovieRankItem>> networkCall;
 
-    public TopTenMoviesPresenter(ZmdbApiService apiService){
-        //TODO: Add cache here.
+    public TopTenMoviesPresenter(ZmdbApiService apiService, ZmdbCache cache){
         this.apiService = apiService;
+        this.cache = cache;
     }
 
     public void loadTopTenMovies(final boolean pullToRefresh){
-        if(getView() != null){
-            getView().showLoading(pullToRefresh);
+        final TopTenMoviesView view = getView();
+        if(view != null){
+            view.showLoading(pullToRefresh);
         }
         if (networkCall != null && !networkCall.isCanceled()) {
             networkCall.cancel();
+        }
+        final List<MovieRankItem> cachedItems = cache.getCachedTopTenMovies();
+        if(cachedItems != null && !(cachedItems.isEmpty())){
+            //Send back cached data.
+            if(view != null){
+                view.setData(cachedItems);
+                view.showContent();
+            }
+            return;
         }
         networkCall = apiService.moviesByRank(0, 11);
         networkCall.enqueue(new Callback<List<MovieRankItem>>() {
@@ -37,14 +49,14 @@ public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
             public void onResponse(Call<List<MovieRankItem>> call,
                                    Response<List<MovieRankItem>> response) {
                 final List<MovieRankItem> items = response.body();
-                //TODO: Can persist/cache data here if we like
-                final TopTenMoviesView view = getView();
-                if(view != null && isViewAttached()){
+                final TopTenMoviesView currentView = getView();
+                if(currentView != null && isViewAttached()){
                     if(items != null && !(items.isEmpty())){
-                        view.setData(items);
-                        view.showContent();
+                        cache.cacheTopTenMovies(items);
+                        currentView.setData(items);
+                        currentView.showContent();
                     } else {
-                        view.showEmpty();
+                        currentView.showEmpty();
                     }
                 }
             }

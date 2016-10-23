@@ -16,6 +16,7 @@ import com.diegotori.app.zmdb.mvp.TopTenMoviesAdapter;
 import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.diegotori.app.zmdb.mvp.presenters.TopTenMoviesPresenter;
 import com.diegotori.app.zmdb.mvp.views.TopTenMoviesView;
+import com.diegotori.app.zmdb.utils.ZmdbCache;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 
 import java.util.List;
@@ -28,15 +29,17 @@ public class TopTenMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, Lis
         TopTenMoviesView, TopTenMoviesPresenter> implements TopTenMoviesView,
         SwipeRefreshLayout.OnRefreshListener {
     private Zmdb zmdbApp;
+    private ZmdbCache zmdbCache;
     private TopTenMoviesAdapter adapter;
 
     public TopTenMoviesFragment() {
-        this(Zmdb.getInstance());
+        this(Zmdb.getInstance(), ZmdbCache.getInstance());
     }
 
     @SuppressLint("ValidFragment")
-    TopTenMoviesFragment(Zmdb zmdbApp){
+    TopTenMoviesFragment(Zmdb zmdbApp, ZmdbCache zmdbCache){
         this.zmdbApp = zmdbApp;
+        this.zmdbCache = zmdbCache;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class TopTenMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, Lis
         adapter = new TopTenMoviesAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
         loadData(false);
     }
 
@@ -74,7 +78,7 @@ public class TopTenMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, Lis
     @NonNull
     @Override
     public TopTenMoviesPresenter createPresenter() {
-        return new TopTenMoviesPresenter(zmdbApp.getApiService());
+        return new TopTenMoviesPresenter(zmdbApp.getApiService(), zmdbCache);
     }
 
     @Override
