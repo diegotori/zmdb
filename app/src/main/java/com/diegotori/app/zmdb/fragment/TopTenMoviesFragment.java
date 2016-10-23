@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -60,6 +62,28 @@ public class TopTenMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, Lis
         recyclerView.setAdapter(adapter);
 
         loadData(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setActionBarTitle();
+    }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            // Set title
+            setActionBarTitle();
+        }
+    }
+
+    public void setActionBarTitle() {
+        final ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        if(actionBar != null) {
+            // Set title
+            actionBar.setTitle(R.string.top_ten_movies_title);
+        }
     }
 
     @Override

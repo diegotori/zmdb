@@ -1,15 +1,18 @@
 package com.diegotori.app.zmdb;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
+    public static final String FRAG_TOP_TEN_MOVIES = "TopTenMoviesFragment";
+    public static final String FRAG_DISCOVER = "MovieDiscoveryFragment";
+    private DemoItem[] demoItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,36 +20,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        demoItems = createDemoItems();
+        final ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                demoItems));
+        listView.setOnItemClickListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(demoItems[position].intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private DemoItem[] createDemoItems() {
+        return new DemoItem[] {
+            new DemoItem(getString(R.string.top_ten_movies_title),
+                    new Intent(this, FragmentContainerActivity.class)
+                        .putExtra(FragmentContainerActivity.INTENT_EXTRA_FRAG_TYPE,
+                                FRAG_TOP_TEN_MOVIES))
+        };
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    static class DemoItem {
+        String name;
+        Intent intent;
+
+        DemoItem(final String name, final Intent intent){
+            this.name = name;
+            this.intent = intent;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }
