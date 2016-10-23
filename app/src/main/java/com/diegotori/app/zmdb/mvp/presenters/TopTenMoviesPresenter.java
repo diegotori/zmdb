@@ -31,7 +31,7 @@ public class TopTenMoviesPresenter extends MvpBasePresenter<TopTenMoviesView> {
         if (networkCall != null && !networkCall.isCanceled()) {
             networkCall.cancel();
         }
-        networkCall = apiService.moviesByRank(1, 10);
+        networkCall = apiService.moviesByRank(0, 11);
         networkCall.enqueue(new Callback<List<MovieRankItem>>() {
             @Override
             public void onResponse(Call<List<MovieRankItem>> call,
