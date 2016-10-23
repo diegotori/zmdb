@@ -37,6 +37,7 @@ ext {
     hamcrest_version = "1.3"
     okhttp_version = "3.4.1"
     conductor_version = "2.0.3"
+    mosby_version = "2.0.1"
 
     /**
      * Base dependencies shared by every sub-module.
@@ -58,6 +59,8 @@ ext {
             retrofit_converter_gson: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             gson : "com.google.code.gson:gson:$gson_version",
             timber: "com.jakewharton.timber:timber:$timber_version",
+            mosby_mvp: "com.hannesdorfmann.mosby:mvp:$mosby_version",
+            mosby_viewstate: "com.hannesdorfmann.mosby:viewstate:$mosby_version",
             conductor: "com.bluelinelabs:conductor:$conductor_version",
             conductor_support: "com.bluelinelabs:conductor-support:$conductor_version",
             android_rate: "com.github.hotchemi:android-rate:$android_rate_version",

@@ -32,8 +32,8 @@ dependencies {
             rootProject.thirdPartyLibs.okhttp,
             rootProject.thirdPartyLibs.retrofit,
             rootProject.thirdPartyLibs.retrofit_converter_gson,
-            rootProject.thirdPartyLibs.conductor,
-            rootProject.thirdPartyLibs.conductor_support,
+            rootProject.thirdPartyLibs.mosby_mvp,
+            rootProject.thirdPartyLibs.mosby_viewstate,
             rootProject.thirdPartyLibs.timber
     androidTestCompile rootProject.testLibs.espresso_core,
             rootProject.testLibs.android_junit4_runner,
