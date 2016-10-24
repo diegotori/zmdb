@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZMBD</string>
+    <string name="app_name">ZMDB</string>
     <string name="action_settings">Settings</string>
     <string name="movie_rank_label">Rank: %d</string>
     <string name="top_ten_movies_error_label">There was a problem fetching the Top Ten Movies. Please try again later.</string>
