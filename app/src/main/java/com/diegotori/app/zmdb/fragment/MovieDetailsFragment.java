@@ -84,7 +84,7 @@ public class MovieDetailsFragment extends
         buyTicketsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
+                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.zocdoc.com"));
                 v.getContext().startActivity(intent);
             }
         });
