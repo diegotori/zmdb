@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
     <!-- Loading View -->
     <ProgressBar
-        android:id="@+id/loadingView"
+        android:id="@id/loadingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -12,7 +12,7 @@
 
     <!-- Content View -->
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/contentView"
+        android:id="@id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -28,7 +28,7 @@
 
     <!-- Error view -->
     <TextView
-        android:id="@+id/errorView"
+        android:id="@id/errorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
