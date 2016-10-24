@@ -20,6 +20,7 @@ public class ZmdbCache {
     private ZmdbCache() {
         this.runtimeCache = Cache2kBuilder.of(String.class, Object.class)
                 .expireAfterWrite(30, TimeUnit.MINUTES)
+                .entryCapacity(20)
                 .build();
     }
 
