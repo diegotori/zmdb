@@ -52,6 +52,10 @@ public class TopTenMoviesAdapter extends RecyclerView.Adapter<TopTenMoviesAdapte
         }
     }
 
+    public MovieRankItem getItemAtPosition(int position){
+        return movieRankItems.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return movieRankItems.size();
@@ -73,7 +77,7 @@ public class TopTenMoviesAdapter extends RecyclerView.Adapter<TopTenMoviesAdapte
         }
 
         void bindItem(final MovieRankItem item) {
-            final String placeholderUrl = ZmdbUtils.generatePlaceholderUrl(res, 120, 180);
+            final String placeholderUrl = ZmdbUtils.generatePlaceholderUrl(res, 80, 120);
             picasso.load(placeholderUrl).into(moviePoster);
 
             movieTitle.setText("");

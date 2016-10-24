@@ -3,6 +3,9 @@ package com.diegotori.app.zmdb.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,7 @@ import com.diegotori.app.zmdb.mvp.TopTenMoviesAdapter;
 import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 import com.diegotori.app.zmdb.mvp.presenters.TopTenMoviesPresenter;
 import com.diegotori.app.zmdb.mvp.views.TopTenMoviesView;
+import com.diegotori.app.zmdb.utils.ItemClickSupport;
 import com.diegotori.app.zmdb.utils.ZmdbCache;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 
@@ -60,7 +64,20 @@ public class TopTenMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, Lis
         adapter = new TopTenMoviesAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-
+        final FragmentManager fragMan = getFragmentManager();
+        ItemClickSupport.addTo(recyclerView)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        final MovieRankItem item = adapter.getItemAtPosition(position);
+                        final Fragment movieDetailsFrag = MovieDetailsFragment.newInstance(item.getId());
+                        fragMan.beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .replace(R.id.main_container, movieDetailsFrag)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
         loadData(false);
     }
 
