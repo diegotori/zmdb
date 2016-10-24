@@ -16,12 +16,22 @@ import java.util.concurrent.TimeUnit;
 public class ZmdbCache {
     private final Cache<String, Object> runtimeCache;
     private static final String TOP_TEN_MOVIES = "top_ten_movies";
+    private static final String ALL_MOVIES = "all_movies";
 
     private ZmdbCache() {
         this.runtimeCache = Cache2kBuilder.of(String.class, Object.class)
                 .expireAfterWrite(30, TimeUnit.MINUTES)
                 .entryCapacity(20)
                 .build();
+    }
+
+    public void cacheAllMovies(final List<MovieItem> allMoviesToCache){
+        runtimeCache.put(ALL_MOVIES, allMoviesToCache);
+    }
+
+    public List<MovieItem> getAllCachedMovies() {
+        //noinspection unchecked
+        return (List<MovieItem>) runtimeCache.get(ALL_MOVIES);
     }
 
     public void cacheTopTenMovies(final List<MovieRankItem> itemsToCache){

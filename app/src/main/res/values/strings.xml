@@ -5,6 +5,7 @@
     <string name="top_ten_movies_error_label">There was a problem fetching the Top Ten Movies. Please try again later.</string>
     <string name="movie_details_error_label">There was a problem fetching the Movie Details. Please try again later.</string>
     <string name="top_ten_movies_title">Top Ten Movies</string>
+    <string name="all_movies_title">All Movies</string>
     <string name="movie_details_label">Movie Details</string>
     <string name="movie_director_label">Director: %s</string>
     <string name="movie_duration_label">Running Time: %s</string>

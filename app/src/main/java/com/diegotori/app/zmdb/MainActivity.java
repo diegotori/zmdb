@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
     public static final String FRAG_TOP_TEN_MOVIES = "TopTenMoviesFragment";
-    public static final String FRAG_DISCOVER = "MovieDiscoveryFragment";
+    public static final String FRAG_ALL_MOVIES = "AllMoviesFragment";
     private DemoItem[] demoItems;
 
     @Override
@@ -34,10 +34,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private DemoItem[] createDemoItems() {
         return new DemoItem[] {
-            new DemoItem(getString(R.string.top_ten_movies_title),
-                    new Intent(this, FragmentContainerActivity.class)
-                        .putExtra(FragmentContainerActivity.INTENT_EXTRA_FRAG_TYPE,
-                                FRAG_TOP_TEN_MOVIES))
+                new DemoItem(getString(R.string.top_ten_movies_title),
+                        new Intent(this, FragmentContainerActivity.class)
+                            .putExtra(FragmentContainerActivity.INTENT_EXTRA_FRAG_TYPE,
+                                    FRAG_TOP_TEN_MOVIES)),
+                new DemoItem(getString(R.string.all_movies_title),
+                        new Intent(this, FragmentContainerActivity.class)
+                                .putExtra(FragmentContainerActivity.INTENT_EXTRA_FRAG_TYPE,
+                                        FRAG_ALL_MOVIES))
         };
     }
 

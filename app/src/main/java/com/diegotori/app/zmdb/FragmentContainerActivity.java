@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.diegotori.app.zmdb.fragment.AllMoviesFragment;
 import com.diegotori.app.zmdb.fragment.TopTenMoviesFragment;
 
 /**
@@ -36,7 +37,7 @@ public class FragmentContainerActivity extends AppCompatActivity {
                         if (fragMan.getBackStackEntryCount() > 0) {
                             actionBar.setDisplayHomeAsUpEnabled(true);
                         } else {
-                            actionBar.setDisplayHomeAsUpEnabled(false);
+                            actionBar.setDisplayHomeAsUpEnabled(true);
                         }
                     }
                 });
@@ -60,6 +61,8 @@ public class FragmentContainerActivity extends AppCompatActivity {
         Fragment result = null;
         if(fragmentType.equals(MainActivity.FRAG_TOP_TEN_MOVIES)){
             result = new TopTenMoviesFragment();
+        } else if(fragmentType.equals(MainActivity.FRAG_ALL_MOVIES)) {
+            result = new AllMoviesFragment();
         }
         return result;
     }
