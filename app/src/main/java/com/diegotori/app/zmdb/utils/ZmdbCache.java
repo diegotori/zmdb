@@ -1,5 +1,6 @@
 package com.diegotori.app.zmdb.utils;
 
+import com.diegotori.app.zmdb.mvp.model.MovieItem;
 import com.diegotori.app.zmdb.mvp.model.MovieRankItem;
 
 import org.cache2k.Cache;
@@ -29,6 +30,14 @@ public class ZmdbCache {
     public List<MovieRankItem> getCachedTopTenMovies() {
         //noinspection unchecked
         return (List<MovieRankItem>) runtimeCache.get(TOP_TEN_MOVIES);
+    }
+
+    public void cacheMovieDetails(final int movieId, final MovieItem movieDetails){
+        runtimeCache.put(Integer.toString(movieId), movieDetails);
+    }
+
+    public MovieItem getCachedMovieDetails(final int movieId) {
+        return (MovieItem) runtimeCache.get(Integer.toString(movieId));
     }
 
     public void clear() {

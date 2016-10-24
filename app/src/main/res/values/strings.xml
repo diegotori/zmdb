@@ -3,5 +3,13 @@
     <string name="action_settings">Settings</string>
     <string name="movie_rank_label">Rank: %d</string>
     <string name="top_ten_movies_error_label">There was a problem fetching the Top Ten Movies. Please try again later.</string>
+    <string name="movie_details_error_label">There was a problem fetching the Movie Details. Please try again later.</string>
     <string name="top_ten_movies_title">Top Ten Movies</string>
+    <string name="movie_details_label">Movie Details</string>
+    <string name="movie_director_label">Director: %s</string>
+    <string name="movie_duration_label">Running Time: %s</string>
+    <string name="movie_description_label">Description</string>
+    <string name="movie_actors_label">Cast</string>
+    <string name="movie_genres_label">Genres</string>
+    <string name="movie_tickets_label">Buy Tickets</string>
 </resources>
