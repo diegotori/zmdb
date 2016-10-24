@@ -39,7 +39,6 @@ public class MovieDetailsFragment extends
     private ZmdbCache zmdbCache;
     private ImageView moviePoster;
     private TextView movieTitle;
-    private TextView movieRank;
     private TextView movieDirector;
     private TextView movieDuration;
     private TextView movieDescription;
@@ -76,7 +75,6 @@ public class MovieDetailsFragment extends
         super.onViewCreated(view, savedInstanceState);
         moviePoster = (ImageView) view.findViewById(R.id.movie_details_poster);
         movieTitle = (TextView) view.findViewById(R.id.movie_details_title);
-        movieRank = (TextView) view.findViewById(R.id.movie_details_rank);
         movieDirector = (TextView) view.findViewById(R.id.movie_details_director);
         movieDuration = (TextView) view.findViewById(R.id.movie_details_duration);
         movieDescription = (TextView) view.findViewById(R.id.movie_details_description);
@@ -132,7 +130,6 @@ public class MovieDetailsFragment extends
         Picasso.with(getContext()).load(placeholderUrl).into(moviePoster);
         movieTitle.setText(data.getName());
         movieDirector.setText(getString(R.string.movie_director_label, data.getDirector()));
-        movieRank.setText(getString(R.string.movie_rank_label, data.getRank()));
         movieDuration.setText(getString(R.string.movie_duration_label, data.getDuration()));
         movieDescription.setText(data.getDescription());
         movieActors.setText(TextUtils.join(", ", data.getActors()));
