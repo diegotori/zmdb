@@ -2,4 +2,5 @@
     <item name="contentView" type="id"/>
     <item name="errorView" type="id"/>
     <item name="loadingView" type="id"/>
+    <item name="item_click_support" type="id" />
 </resources>
