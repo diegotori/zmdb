@@ -10,6 +10,7 @@ import org.greenrobot.greendao.database.Database;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
  * The ZocDoc Movie DataBase (ZMDB).
@@ -26,6 +27,9 @@ public class Zmdb extends Application {
     public void onCreate(){
         super.onCreate();
         instance = this;
+        if(BuildConfig.DEBUG){
+            Timber.plant(new Timber.DebugTree());
+        }
         retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.ZOCDOC_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
