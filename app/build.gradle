@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.compile_sdk_version
@@ -37,7 +38,8 @@ dependencies {
             rootProject.thirdPartyLibs.mosby_viewstate,
             rootProject.thirdPartyLibs.cache2k_core,
             rootProject.thirdPartyLibs.cache2k_api,
-            rootProject.thirdPartyLibs.timber
+            rootProject.thirdPartyLibs.timber,
+            rootProject.thirdPartyLibs.greendao
     androidTestCompile rootProject.testLibs.espresso_core,
             rootProject.testLibs.android_junit4_runner,
             rootProject.testLibs.android_junit4_rules,

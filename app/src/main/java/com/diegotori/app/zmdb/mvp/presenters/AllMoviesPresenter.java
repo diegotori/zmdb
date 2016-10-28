@@ -1,10 +1,13 @@
 package com.diegotori.app.zmdb.mvp.presenters;
 
 import com.diegotori.app.zmdb.api_service.ZmdbApiService;
+import com.diegotori.app.zmdb.database.entities.DaoSession;
 import com.diegotori.app.zmdb.mvp.ZmdbBasePresenter;
 import com.diegotori.app.zmdb.mvp.model.MovieItem;
 import com.diegotori.app.zmdb.mvp.views.AllMoviesView;
 import com.diegotori.app.zmdb.utils.ZmdbCache;
+
+import org.greenrobot.greendao.async.AsyncSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +22,10 @@ import retrofit2.Response;
 
 public class AllMoviesPresenter extends ZmdbBasePresenter<AllMoviesView> {
     private Call<List<MovieItem>> networkCall;
-    public AllMoviesPresenter(ZmdbApiService apiService, ZmdbCache cache) {
+    private final DaoSession daoSession;
+    public AllMoviesPresenter(ZmdbApiService apiService, ZmdbCache cache, DaoSession daoSession) {
         super(apiService, cache);
+        this.daoSession = daoSession;
     }
 
     public void loadAllMovies(boolean pullToRefresh) {

@@ -116,7 +116,7 @@ public class AllMoviesFragment extends MvpLceFragment<SwipeRefreshLayout, List<M
     @NonNull
     @Override
     public AllMoviesPresenter createPresenter() {
-        return new AllMoviesPresenter(zmdbApp.getApiService(), zmdbCache);
+        return new AllMoviesPresenter(zmdbApp.getApiService(), zmdbCache, zmdbApp.getDaoSession());
     }
 
     @Override
