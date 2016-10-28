@@ -22,7 +22,7 @@ public class MovieItem{
 	private List<String> Actors;
 	@SerializedName("Id")
 	@Expose
-	private int Id;
+	private long Id;
 	@SerializedName("Genres")
 	@Expose
 	private List<String> Genres;
@@ -70,11 +70,11 @@ public class MovieItem{
 		return Actors;
 	}
 
-	public void setId(int Id){
+	public void setId(long Id){
 		this.Id = Id;
 	}
 
-	public int getId(){
+	public long getId(){
 		return Id;
 	}
 
