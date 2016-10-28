@@ -47,12 +47,12 @@ public class Movies {
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
     /** Used for active entity operations. */
-    @Generated(hash = 1042217376)
-    private transient MovieDao myDao;
+    @Generated(hash = 1498995168)
+    private transient MoviesDao myDao;
 
-    @Generated(hash = 1510043095)
-    public Movies(long id, int rank, String name, String description,
-                  String director, String duration) {
+    @Generated(hash = 1184562422)
+    public Movies(long id, int rank, String name, String description, String director,
+            String duration) {
         this.id = id;
         this.rank = rank;
         this.name = name;
@@ -61,7 +61,7 @@ public class Movies {
         this.duration = duration;
     }
 
-    @Generated(hash = 1263461133)
+    @Generated(hash = 2138365087)
     public Movies() {
     }
 
@@ -117,7 +117,7 @@ public class Movies {
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 1610048790)
+    @Generated(hash = 347414133)
     public List<Actors> getActors() {
         if (actors == null) {
             final DaoSession daoSession = this.daoSession;
@@ -125,7 +125,7 @@ public class Movies {
                 throw new DaoException("Entity is detached from DAO context");
             }
             ActorsDao targetDao = daoSession.getActorsDao();
-            List<Actors> actorsNew = targetDao._queryMovie_Actors(id);
+            List<Actors> actorsNew = targetDao._queryMovies_Actors(id);
             synchronized (this) {
                 if (actors == null) {
                     actors = actorsNew;
@@ -145,7 +145,7 @@ public class Movies {
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 887003539)
+    @Generated(hash = 1244776938)
     public List<Genres> getGenres() {
         if (genres == null) {
             final DaoSession daoSession = this.daoSession;
@@ -153,7 +153,7 @@ public class Movies {
                 throw new DaoException("Entity is detached from DAO context");
             }
             GenresDao targetDao = daoSession.getGenresDao();
-            List<Genres> genresNew = targetDao._queryMovie_Genres(id);
+            List<Genres> genresNew = targetDao._queryMovies_Genres(id);
             synchronized (this) {
                 if (genres == null) {
                     genres = genresNew;
@@ -206,9 +206,9 @@ public class Movies {
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 215161401)
+    @Generated(hash = 1638442879)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getMovieDao() : null;
+        myDao = daoSession != null ? daoSession.getMoviesDao() : null;
     }
 }
