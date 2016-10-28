@@ -19,7 +19,7 @@ import org.greenrobot.greendao.DaoException;
                 @Index(value = "id", unique = true)
         }
 )
-public class Movie {
+public class Movies {
     @Id
     private long id;
     private int rank;
@@ -51,8 +51,8 @@ public class Movie {
     private transient MovieDao myDao;
 
     @Generated(hash = 1510043095)
-    public Movie(long id, int rank, String name, String description,
-            String director, String duration) {
+    public Movies(long id, int rank, String name, String description,
+                  String director, String duration) {
         this.id = id;
         this.rank = rank;
         this.name = name;
@@ -62,7 +62,7 @@ public class Movie {
     }
 
     @Generated(hash = 1263461133)
-    public Movie() {
+    public Movies() {
     }
 
     public long getId() {
