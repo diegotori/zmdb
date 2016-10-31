@@ -2,6 +2,7 @@ package com.diegotori.app.zmdb.mvp.model;
 
 import android.os.AsyncTask;
 
+import com.diegotori.app.zmdb.database.AllMoviesSyncProcessor;
 import com.diegotori.app.zmdb.database.entities.DaoSession;
 import com.diegotori.app.zmdb.database.entities.Movies;
 
@@ -22,7 +23,7 @@ public class AllMoviesSyncLoader extends AsyncTask<Void, Void, List<Movies>> {
     private final Call<List<MovieItem>> networkCall;
     private final DaoSession daoSession;
     private WeakReference<SyncLoaderListener> weakRefdListener;
-
+    private AllMoviesSyncProcessor processor;
 
     public AllMoviesSyncLoader(final Call<List<MovieItem>> networkCall,
                                final DaoSession daoSession,
@@ -30,19 +31,22 @@ public class AllMoviesSyncLoader extends AsyncTask<Void, Void, List<Movies>> {
         this.networkCall = networkCall;
         this.daoSession = daoSession;
         this.weakRefdListener = new WeakReference<>(listener);
+        this.processor = new AllMoviesSyncProcessor(daoSession);
     }
 
     @Override
     protected List<Movies> doInBackground(Void... params) {
         Response<List<MovieItem>> response = null;
+        List<Movies> result = null;
         try {
             response = networkCall.execute();
         } catch (Exception ignored) {}
         if(response != null){
             final List<MovieItem> incomingMovies = response.body();
-
+            processor.processIncomingMovies(incomingMovies);
+            result = daoSession.loadAll(Movies.class);
         }
-        return null;
+        return result;
     }
 
     @Override
