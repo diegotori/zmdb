@@ -10,11 +10,11 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class JoinMoviesWithActors {
     @Id
-    private long id;
-    private long movieId;
-    private long actorId;
-    @Generated(hash = 2055801880)
-    public JoinMoviesWithActors(long id, long movieId, long actorId) {
+    private Long id;
+    private Long movieId;
+    private Long actorId;
+    @Generated(hash = 937842135)
+    public JoinMoviesWithActors(Long id, Long movieId, Long actorId) {
         this.id = id;
         this.movieId = movieId;
         this.actorId = actorId;
@@ -22,22 +22,22 @@ public class JoinMoviesWithActors {
     @Generated(hash = 2133223819)
     public JoinMoviesWithActors() {
     }
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public long getMovieId() {
+    public Long getMovieId() {
         return this.movieId;
     }
-    public void setMovieId(long movieId) {
+    public void setMovieId(Long movieId) {
         this.movieId = movieId;
     }
-    public long getActorId() {
+    public Long getActorId() {
         return this.actorId;
     }
-    public void setActorId(long actorId) {
+    public void setActorId(Long actorId) {
         this.actorId = actorId;
     }
 }

@@ -4,6 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.JoinEntity;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.ToMany;
 
@@ -22,8 +23,9 @@ import org.greenrobot.greendao.DaoException;
 )
 public class Movies {
     @Id
-    private long id;
-    private int rank;
+    private Long id;
+    @NotNull
+    private Integer rank;
     private String name;
     private String description;
     private String director;
@@ -53,8 +55,8 @@ public class Movies {
     @Generated(hash = 1498995168)
     private transient MoviesDao myDao;
 
-    @Generated(hash = 1184562422)
-    public Movies(long id, int rank, String name, String description, String director,
+    @Generated(hash = 1494219595)
+    public Movies(Long id, @NotNull Integer rank, String name, String description, String director,
             String duration) {
         this.id = id;
         this.rank = rank;
@@ -68,19 +70,19 @@ public class Movies {
     public Movies() {
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getRank() {
+    public Integer getRank() {
         return this.rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Integer rank) {
         this.rank = rank;
     }
 

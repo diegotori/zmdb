@@ -266,12 +266,13 @@ public class AllMoviesSyncProcessor {
             final List<JoinMoviesWithGenres> newMovieGenreEntries = new ArrayList<>();
             //First populate the new movie entries to add to the DB.
             for (MovieItem movieItem : movieIdsToMovieItems.values()) {
-                final Movies newMovieEntry = new Movies();
-                newMovieEntry.setId(movieItem.getId());
-                newMovieEntry.setRank(movieItem.getRank());
-                newMovieEntry.setDescription(movieItem.getDescription());
-                newMovieEntry.setDirector(movieItem.getDirector());
-                newMovieEntry.setDuration(movieItem.getDuration());
+                final Movies newMovieEntry = new Movies(
+                        Long.valueOf(movieItem.getId()),
+                        movieItem.getRank(),
+                        movieItem.getName(),
+                        movieItem.getDescription(),
+                        movieItem.getDirector(),
+                        movieItem.getDuration());
                 newMovieEntries.add(newMovieEntry);
             }
             //Insert the new movie entries first.
@@ -288,11 +289,11 @@ public class AllMoviesSyncProcessor {
                      */
                     final List<Actors> newMovieEntryActors = newMovieEntry.getActors();
                     for(String actor : actorsToAdd) {
-                        final Actors newActorEntry = new Actors();
-                        newActorEntry.setName(actor);
-                        final JoinMoviesWithActors newMovieActorEntry = new JoinMoviesWithActors();
-                        newMovieActorEntry.setMovieId(newMovieEntry.getId());
-                        newMovieActorEntry.setActorId(newActorEntry.getId());
+                        final Actors newActorEntry = new Actors(null, actor);
+                        final JoinMoviesWithActors newMovieActorEntry =
+                                new JoinMoviesWithActors(null,
+                                        newMovieEntry.getId(),
+                                        newActorEntry.getId());
                         //Add new actor entry to the new movie entry's list of actors
                         newMovieEntryActors.add(newActorEntry);
                         //Queue up new entries to the DB
@@ -310,11 +311,11 @@ public class AllMoviesSyncProcessor {
                      */
                     final List<Genres> newMovieEntryGenres = newMovieEntry.getGenres();
                     for(String genre : genresToAdd) {
-                        final Genres newGenreEntry = new Genres();
-                        newGenreEntry.setName(genre);
-                        final JoinMoviesWithGenres newMovieGenreEntry = new JoinMoviesWithGenres();
-                        newMovieGenreEntry.setMovieId(newMovieEntry.getId());
-                        newMovieGenreEntry.setGenreId(newGenreEntry.getId());
+                        final Genres newGenreEntry = new Genres(null, genre);
+                        final JoinMoviesWithGenres newMovieGenreEntry =
+                                new JoinMoviesWithGenres(null,
+                                        newMovieEntry.getId(),
+                                        newGenreEntry.getId());
                         //Add new genre entry to the new movie entry's list of genres
                         newMovieEntryGenres.add(newGenreEntry);
                         //Queue up new entries to the DB
