@@ -29,14 +29,11 @@ import timber.log.Timber;
  */
 
 public class AllMoviesSyncProcessor {
-    private static final String INSERT = "insert";
     private static final String UPDATE = "update";
     private static final String DELETE = "delete";
 
-//    private DaoSession daoSession;
+    private DaoSession daoSession;
     private MoviesDao moviesDao;
-    private ActorsDao actorsDao;
-    private GenresDao genresDao;
     private JoinMoviesWithActorsDao movieActorsDao;
     private JoinMoviesWithGenresDao movieGenresDao;
     private final HashMap<Long, MovieItem> movieIdsToMovieItems;
@@ -49,10 +46,8 @@ public class AllMoviesSyncProcessor {
 
     @SuppressLint("UseSparseArrays")
     public AllMoviesSyncProcessor(DaoSession daoSession){
-//        this.daoSession = daoSession;
+        this.daoSession = daoSession;
         this.moviesDao = daoSession.getMoviesDao();
-        this.actorsDao = daoSession.getActorsDao();
-        this.genresDao = daoSession.getGenresDao();
         this.movieActorsDao = daoSession.getJoinMoviesWithActorsDao();
         this.movieGenresDao = daoSession.getJoinMoviesWithGenresDao();
         this.moviesDbCrudOps = new HashMap<>();
@@ -76,22 +71,6 @@ public class AllMoviesSyncProcessor {
     private void mapIncomingMovieItemData(final List<MovieItem> movieItems){
         if(movieItems != null && movieItems.size() > 0){
             Timber.d("Mapping incoming MovieItem data by Movie ID....");
-            //clear any existing merge data (thus allowing one to reuse this object more than once).
-            if(movieIdsToMovieItems.size() > 0){
-                Timber.d("Cleared out previous MovieItem map entries.");
-                movieIdsToMovieItems.clear();
-            }
-
-            if(movieIdsToActors.size() > 0) {
-                Timber.d("Cleared out previous Actor map entries.");
-                movieIdsToActors.clear();
-            }
-
-            if(movieIdsToGenres.size() > 0) {
-                Timber.d("Cleared out previous Genre map entries.");
-                movieIdsToGenres.clear();
-            }
-
             for(MovieItem movieItem : movieItems){
                 movieIdsToMovieItems.put((long) movieItem.getId(), movieItem);
                 movieIdsToActors.put((long) movieItem.getId(), movieItem.getActors());
@@ -278,6 +257,8 @@ public class AllMoviesSyncProcessor {
 
         if(movieIdsToMovieItems.size() > 0){
             //We have new movies to add.
+            final ActorsDao actorsDao = daoSession.getActorsDao();
+            final GenresDao genresDao = daoSession.getGenresDao();
             final List<Movies> newMovieEntries = new ArrayList<>();
             final List<Actors> newActorEntries = new ArrayList<>();
             final List<JoinMoviesWithActors> newMovieActorEntries = new ArrayList<>();
@@ -346,8 +327,14 @@ public class AllMoviesSyncProcessor {
             movieActorsDao.insertInTx(newMovieActorEntries);
             genresDao.insertInTx(newGenreEntries);
             movieGenresDao.insertInTx(newMovieGenreEntries);
+            //clear any existing merge data (thus allowing one to reuse this object more than once).
+            Timber.d("Cleared out temporary MovieItem map entries.");
+            movieIdsToMovieItems.clear();
+            Timber.d("Cleared out temporary MovieItem Actor map entries.");
+            movieIdsToActors.clear();
+            Timber.d("Cleared out temporary MovieItem Genre map entries.");
+            movieIdsToGenres.clear();
         }
-
     }
 
     private boolean isStringDirty(final String incoming, final String existing){
