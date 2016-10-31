@@ -4,6 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.JoinEntity;
+import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.ToMany;
 
 import java.util.List;
@@ -30,18 +31,20 @@ public class Movies {
 
     @ToMany
     @JoinEntity(
-            entity = MovieActors.class,
+            entity = JoinMoviesWithActors.class,
             sourceProperty = "movieId",
             targetProperty = "actorId"
     )
+    @OrderBy("name ASC")
     private List<Actors> actors;
 
     @ToMany
     @JoinEntity(
-            entity = MovieGenres.class,
+            entity = JoinMoviesWithGenres.class,
             sourceProperty = "movieId",
             targetProperty = "genreId"
     )
+    @OrderBy("name ASC")
     private List<Genres> genres;
     /** Used to resolve relations */
     @Generated(hash = 2040040024)

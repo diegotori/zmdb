@@ -8,19 +8,19 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by Diego on 10/27/2016.
  */
 @Entity
-public class MovieGenres {
+public class JoinMoviesWithGenres {
     @Id
     private long id;
     private long movieId;
     private long genreId;
-    @Generated(hash = 1426358006)
-    public MovieGenres(long id, long movieId, long genreId) {
+    @Generated(hash = 1231551601)
+    public JoinMoviesWithGenres(long id, long movieId, long genreId) {
         this.id = id;
         this.movieId = movieId;
         this.genreId = genreId;
     }
-    @Generated(hash = 1474546429)
-    public MovieGenres() {
+    @Generated(hash = 1744236931)
+    public JoinMoviesWithGenres() {
     }
     public long getId() {
         return this.id;
